@@ -97,8 +97,12 @@ resource "aws_lb_listener" "eap-alb-listener" {
   certificate_arn   = var.CERTARN
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target-group.arn
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "There is no spoon..."  
+      status_code  = "501"
+    }
   }
 }
 
